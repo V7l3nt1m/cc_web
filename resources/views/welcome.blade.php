@@ -24,7 +24,7 @@
 
   <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
     <!-- navbar-->
-   
+    <div id="preloader"></div>
    
 
     <header class="header">
@@ -73,7 +73,7 @@
               </div>
             </div>
           </div>
-          <div class="swiper-slide hero-slide bg-cover bg-center py-4 with-border-image d-flex align-items-center caridade-img" style="background: url(/assets1/img/caridade2.jpg)">
+          <div class="swiper-slide hero-slide bg-cover bg-center py-5 with-border-image d-flex align-items-center caridade-img" style="background: url(/assets1/img/caridade2.jpg)">
             <div class="container text-white py-5 my-5 index-forward">
               <h1 class="text-uppercase text-xl mt-5">SubLema</h1>
               <div class="row">
