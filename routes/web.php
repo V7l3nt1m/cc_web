@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GetController;
-
+use App\Http\Controllers\UpdateController;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,12 @@ use App\Http\Controllers\GetController;
 
 Route::get('/', [GetController::class, 'index']);
 
+Route::get('/admin', [GetController::class, 'admin_dashboard'])->middleware('auth');
+Route::get('/admin/perfil', [GetController::class, 'perfil_admin'])->middleware('auth');
+Route::get('/admin/usuarios', [GetController::class, 'gestaoUsuariosAdmin'])->middleware('auth');
+Route::put('/admin/perfil/actualizar', [UpdateController::class, 'updateAdminPerfil'])->middleware('auth');
+
+
 
 
 
@@ -27,6 +34,10 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = auth()->user();
+
+        if($user->permissao == "admin"){
+            return redirect('/admin');
+        }
     })->name('dashboard');
 });

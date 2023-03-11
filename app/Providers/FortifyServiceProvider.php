@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Requests\LoginRequest;
+use Hash;
+use App\Models\User;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -33,9 +37,21 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         RateLimiter::for('login', function (Request $request) {
-            $email = (string) $request->email;
+            $email = (string) $request->username;
 
             return Limit::perMinute(5)->by($email.$request->ip());
+        });
+
+        Fortify::authenticateUsing(function (LoginRequest $request) {
+            $user = User::where('username', $request->username)->first();
+
+            if (
+                $user &&
+            Hash::check($request->password, $user->password)
+            ) {
+                User::where('id', $user->id)->update(['hora_login' => date("Y-m-d H:i:s")]);
+                return $user;
+            }
         });
 
         RateLimiter::for('two-factor', function (Request $request) {

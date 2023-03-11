@@ -51,8 +51,11 @@
               <li class="nav-item"><a class="nav-link" href="#sermons">Histórico</a></li>
               <li class="nav-item"><a class="nav-link" href="#works">Liturgia</a></li>
               @auth
+              <form action="/logout" method="POST">
+                @csrf
               <li class="nav-item"><a class="nav-link" href="/logout" onclick="event.preventDefault();
                 this.closest('form').submit();">Sair</a></li>
+              </form>
               @endauth
             </ul>
           </div>
@@ -99,12 +102,12 @@
         </header>
         <div class="row text-center gy-4">
           <div class="col-lg-3"><i class="fas text-primary mb-4 fa-3x fa-church"></i>
-            <h3 class="h5">Funcao</h3>
+            <h3 class="h5">{{--$admins->permissao--}}</h3>
 
             <div class="card" style="width: 18rem;">
-                <img src="/fotos/" class="card-img-top" alt="...">
+                <img src="/photos/{{--$admins->photo--}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <p class="card-text">Nome</p>
+                  <p class="card-text">{{--$admins->name--}}</p>
                 </div>
               </div>
           </div>

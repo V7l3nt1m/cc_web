@@ -27,7 +27,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'photo',
+        'permissao',
+        'estado',
+        'data_nasc',
     ];
+    protected $dates = ['data_nasc','hora_login', 'hora_logout'];
 
     /**
      * The attributes that should be hidden for serialization.
