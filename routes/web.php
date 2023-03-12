@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GetController;
 use App\Http\Controllers\UpdateController;
+use App\Http\Controllers\CreateController;
+use App\Http\Controllers\DeleteController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +20,24 @@ use App\Models\User;
 Route::get('/', [GetController::class, 'index']);
 
 Route::get('/admin', [GetController::class, 'admin_dashboard'])->middleware('auth');
-Route::get('/admin/perfil', [GetController::class, 'perfil_admin'])->middleware('auth');
-Route::get('/admin/usuarios', [GetController::class, 'gestaoUsuariosAdmin'])->middleware('auth');
-Route::put('/admin/perfil/actualizar', [UpdateController::class, 'updateAdminPerfil'])->middleware('auth');
+Route::put('/lock/{id}', [UpdateController::class, 'lock_user'])->middleware('auth')->name('lock');
+Route::put('/unlock/{id}', [UpdateController::class, 'unlock_user'])->middleware('auth');
 
+Route::prefix('admin')->middleware('auth')->group(function (){
+    Route::get('/perfil', [GetController::class, 'perfil_admin'])->middleware('auth');
+    Route::get('/usuarios', [GetController::class, 'gestaoUsuariosAdmin'])->middleware('auth');
+    Route::get('/logs', [GetController::class, 'gestaoLogs'])->middleware('auth');
 
+    Route::put('/perfil/actualizar', [UpdateController::class, 'updateAdminPerfil'])->middleware('auth');
+    Route::post('/usuarios/cadastro', [CreateController::class, 'storeUsers'])->middleware('auth');
+    Route::delete('/delete_log/{log_id}', [DeleteController::class, 'destroy_log'])->middleware('auth');
+    Route::delete('/delete/{id}', [DeleteController::class, 'destroy_user'])->middleware('auth');
+    Route::get('/edit/{id}', [GetController::class, 'edit'])->middleware('auth');
+
+    Route::put('/update/{id}', [UpdateController::class, 'update'])->middleware('auth');
+    
+
+});
 
 
 

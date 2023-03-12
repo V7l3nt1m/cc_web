@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('photo');
             $table->string('permissao');
-            $table->dateTime('estado')->nullable();
+            $table->integer('estado')->default(1);
             $table->dateTime('hora_login')->nullable();
             $table->dateTime('hora_logout')->nullable();
-            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

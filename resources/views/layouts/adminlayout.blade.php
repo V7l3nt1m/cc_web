@@ -54,6 +54,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/admin/logs">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-support-16 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Logs</span>
+          </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link " href="/admin/perfil">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
@@ -163,6 +171,20 @@
       </footer>
     </div>
   </main>
+
+  <script type="text/javascript">
+    function updatePreview(input, target) {
+      let file = input.files[0];
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+          let img = document.getElementById(target);
+          // can also use "this.result"
+          img.src = reader.result;
+      }
+    }
+    </script>
   
   <!--   Core JS Files   -->
   <script src="/assets/js/core/popper.min.js"></script>

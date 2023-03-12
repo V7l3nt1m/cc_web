@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
 use App\Models\User;
+use App\Models\CustomLog;
 
 class GetController extends Controller
 {
@@ -31,6 +32,38 @@ class GetController extends Controller
         $user = auth()->user();
 
         return view('admin.perfil', ['user' => $user]);
+    }
+
+    public function gestaoUsuariosAdmin(){
+        $user = auth()->user();
+
+        $search = request('search');
+        if($search){
+            $usuarios = User::where('name', 'like', '%'.$search.'%')->orWhere('genero',  'like', '%'.$search.'%')->get();
+        }else{
+            $usuarios = User::where('id',"<>", $user->id)->get();
+        }
+
+        return view('admin.gestaousuarios', ['user' => $user, 'usuarios' => $usuarios]);
+    }
+
+    public function gestaoLogs(){
+        $user = auth()->user();
+
+        $logs = CustomLog::all();
+
+        return view('admin.logs ', ['user' => $user, 'logs' => $logs]);
+
+    }
+
+
+    public function edit($id){
+        $user = auth()->user();
+
+        $usuario = User::where('id', $id)->first();
+
+        return view('admin.edit', ['user' => $user, 'usuario' => $usuario]);
+
     }
 
 }

@@ -31,9 +31,9 @@ class User extends Authenticatable
         'photo',
         'permissao',
         'estado',
-        'data_nasc',
+        'telefone',
     ];
-    protected $dates = ['data_nasc','hora_login', 'hora_logout'];
+    protected $dates = ['data_nasc'];
 
     /**
      * The attributes that should be hidden for serialization.
