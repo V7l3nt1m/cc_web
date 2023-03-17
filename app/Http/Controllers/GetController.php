@@ -8,18 +8,37 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
 use App\Models\User;
+use App\Models\DailyRead;
 use App\Models\CustomLog;
 
 class GetController extends Controller
 {
     public function index(){
 
-    $response = Http::get('https://liturgia.up.railway.app/');
-    $liturgia = $response->json();
+    $datetoday = date('d/m/Y');
+
+    try {
+        $response = Http::get('https://liturgia.up.railway.app/');
+        $liturgia = $response->json();
+
+        if($datetoday != $liturgia['data']){
+           
+            DailyRead::orderBy('id', 'desc')->limit(1)->delete();
+
+            DailyRead::insert([
+                'liturgia' => json_encode($liturgia),
+            ]);
+        }
+    } catch (\Throwable $th) {
+    }
+
+    $liturgia = DailyRead::orderBy('id', 'desc')->limit(1)
+    ->select('liturgia')
+    ->get();
 
     $admins = User::where('permissao','tesoureiro')->orWhere('permissao','secretario')->orWhere('permissao','coordenador')->orWhere('permissao','subcoordenador')->get();
 
-     return view('welcome', ['liturgia'=>$liturgia, 'admins' => $admins]);
+  return view('welcome', ['liturgia'=>$liturgia, 'admins' => $admins]);
     }
 
     public function admin_dashboard(){

@@ -123,18 +123,18 @@
           <div class="col-lg-6 bg-light py-lg-5">
             <div class="h-100 d-flex flex-column p-5 justify-content-center">
               <p class="text-serif text-primary mb-0">Liturgia Diária</p>
-              <h2 class="text-uppercase">Data: {{$liturgia['data']}}</h2>
-              <p class="text-muted">{{$liturgia['liturgia']}}</p>
-              <p class="text-muted">Cor: {{$liturgia['cor']}}</p>
+              <h2 class="text-uppercase">Data: {{$liturgia[0]->liturgia['data'] }}</h2>
+              <p class="text-muted">{{$liturgia[0]->liturgia['liturgia']}}</p>
+              <p class="text-muted">Cor: {{$liturgia[0]->liturgia['cor']}}</p>
               <ul class="list-check ps-0">
                 <li>
-                  <p class="mb-0 mb-2">{{$liturgia['oferendas']}}</p>
+                  <p class="mb-0 mb-2">{{$liturgia[0]->liturgia['oferendas']}}</p>
                 </li>
                 <li>
-                  <p class="mb-0 mb-2">{{$liturgia['comunhao']}}</p>
+                  <p class="mb-0 mb-2">{{$liturgia[0]->liturgia['comunhao']}}</p>
                 </li>
                 <li>
-                    <p class="mb-0 mb-2">{{$liturgia['dia']}}</p>
+                    <p class="mb-0 mb-2">{{$liturgia[0]->liturgia['dia']}}</p>
                   </li>
                 
               </ul>
@@ -151,8 +151,8 @@
         <div class="overlay-content z-index-20 position-relative py-5">
           <div class="container py-5 text-white text-center">
             <h2 class="text-xl text-shadow mb-4">Primeira Leitura</h2>
-            <h3 class="text-md text-shadow mb-4">{{$liturgia['primeiraLeitura']['titulo']}}</h3>
-            <p class="lead text-calibri mb-1">{{$liturgia['primeiraLeitura']['texto']}}</p>
+            <h3 class="text-md text-shadow mb-4">{{$liturgia[0]->liturgia['primeiraLeitura']['titulo']}}</h3>
+            <p class="lead text-calibri mb-1">{{$liturgia[0]->liturgia['primeiraLeitura']['texto']}}</p>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
         <div class="overlay-content z-index-20 position-relative py-5">
             <div class="container py-5 text-white text-center">
               <h2 class="text-xl text-shadow mb-4">Segunda Leitura</h2>
-              <p class="lead text-calibri mb-1">{{$liturgia['segundaLeitura']}}</p>
+              <p class="lead text-calibri mb-1">{{$liturgia[0]->liturgia['segundaLeitura']}}</p>
             </div>
           </div>
       </div>
@@ -174,7 +174,7 @@
                 <div class="overlay-content z-index-20 position-relative py-5">
                     <div class="container py-5 text-white text-center">
                       <h2 class="text-xl text-shadow mb-4">Salmo</h2>
-                      <p class="lead text-calibri mb-1">{{$liturgia['salmo']}}</p>
+                      <p class="lead text-calibri mb-1">{{$liturgia[0]->liturgia['salmo']}}</p>
                     </div>
                   </div>
               </div>
@@ -184,9 +184,9 @@
         <div class="overlay-content z-index-20 position-relative py-5">
             <div class="container py-5 text-white text-center">
               <h2 class="text-xl text-shadow mb-4">Evangelho</h2>
-              <h3 class="text-md text-shadow mb-4">{{$liturgia['evangelho']['titulo']}}</h3>
+              <h3 class="text-md text-shadow mb-4">{{$liturgia[0]->liturgia['evangelho']['titulo']}}</h3>
               <br>
-              <p class="lead text-calibri mb-1">{{$liturgia['evangelho']['texto']}}</p>
+              <p class="lead text-calibri mb-1">{{$liturgia[0]->liturgia['evangelho']['texto']}}</p>
             </div>
           </div>
       </section>
