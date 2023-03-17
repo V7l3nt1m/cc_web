@@ -123,7 +123,7 @@
           <div class="col-lg-6 bg-light py-lg-5">
             <div class="h-100 d-flex flex-column p-5 justify-content-center">
               <p class="text-serif text-primary mb-0">Liturgia Diária</p>
-              <h2 class="text-uppercase">Data: {{$liturgia[0]->liturgia['data'] }}</h2>
+              <h2 class="text-uppercase">Data: {{$liturgia[0]->liturgia['data']}}</h2>
               <p class="text-muted">{{$liturgia[0]->liturgia['liturgia']}}</p>
               <p class="text-muted">Cor: {{$liturgia[0]->liturgia['cor']}}</p>
               <ul class="list-check ps-0">

@@ -43,6 +43,38 @@ class UpdateController extends Controller
         
     }
 
+    public function updateTesoureiroPerfil(Request $request){
+        $user = auth()->user();
+            $request->validate([
+                'name' => "required",
+                'username' => "required"
+            ]);
+
+            if($request->username != $user->username){
+                $request->validate([
+                    'username' => "required|unique:users"
+                ]);
+            }
+
+            if ($request->password != $request->password2) {
+                return back()->with('erro', 'Palavras passes não coincidem');
+            }else{
+                if(isset($request->password) && !Hash::check($request->password, $user->password)) {
+                    $request->validate([
+                        'password' => 'min: 6',
+                    ]);
+                    $user->update(['password' => Hash::make($request->password)]);
+                }
+            }
+
+            $user->update(['name' => $request->name]);
+            $user->update(['username' => $request->username]);
+
+
+            return back()->with('sucesso', "Dados Actualizados com Sucesso!");
+        
+    }
+
 
     public function lock_user($id){
         $user = auth()->user();

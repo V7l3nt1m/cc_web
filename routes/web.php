@@ -19,11 +19,11 @@ use App\Models\User;
 
 Route::get('/', [GetController::class, 'index']);
 
-Route::get('/admin', [GetController::class, 'admin_dashboard'])->middleware('auth');
+Route::get('/admin', [GetController::class, 'admin_dashboard'])->middleware('auth')->middleware('admin');
 Route::put('/lock/{id}', [UpdateController::class, 'lock_user'])->middleware('auth')->name('lock');
 Route::put('/unlock/{id}', [UpdateController::class, 'unlock_user'])->middleware('auth');
 
-Route::prefix('admin')->middleware('auth')->group(function (){
+Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function (){
     Route::get('/perfil', [GetController::class, 'perfil_admin'])->middleware('auth');
     Route::get('/usuarios', [GetController::class, 'gestaoUsuariosAdmin'])->middleware('auth');
     Route::get('/logs', [GetController::class, 'gestaoLogs'])->middleware('auth');
@@ -34,11 +34,17 @@ Route::prefix('admin')->middleware('auth')->group(function (){
     Route::delete('/delete/{id}', [DeleteController::class, 'destroy_user'])->middleware('auth');
     Route::get('/edit/{id}', [GetController::class, 'edit'])->middleware('auth');
 
-    Route::put('/update/{id}', [UpdateController::class, 'update'])->middleware('auth');
-    
+    Route::put('/update/{id}', [UpdateController::class, 'update'])->middleware('auth'); 
 
 });
 
+Route::get('/tesouraria', [GetController::class, 'tesouraria_dashboard'])->middleware('auth')->middleware('tesoureiro');
+
+Route::prefix('tesouraria')->middleware('auth')->middleware('tesoureiro')->group(function (){
+    Route::get('/perfil', [GetController::class, 'perfil_tesoura'])->middleware('auth');
+    Route::put('/perfil/actualizar', [UpdateController::class, 'updateTesoureiroPerfil'])->middleware('auth');
+
+});
 
 
 
@@ -53,6 +59,14 @@ Route::middleware([
 
         if($user->permissao == "admin"){
             return redirect('/admin');
+        }elseif($user->permissao == "tesoureiro"){
+            return redirect('/tesouraria');
+        }elseif($user->permissao == "secretario"){
+            return redirect('/secretaria');
+        }elseif($user->permissao == "coordenador"){
+            return redirect('/coordenador');
+        }elseif($user->permissao == "vice-coordeandor"){
+            return redirect('/vicecoordenador');
         }
     })->name('dashboard');
 });
