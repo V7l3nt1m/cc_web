@@ -110,6 +110,12 @@ class GetController extends Controller
         return view('tesouraria.caixa', ['user' => $user, 'movimentos' => $movimentos, 'saldo' => $saldo]);
     }
 
+    public function cotas_tesouraria(){
+        $user = auth()->user();
+
+        return view('tesouraria.cotas', ['user' => $user]);
+
+    }
 
 
 
