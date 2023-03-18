@@ -41,8 +41,10 @@ Route::prefix('admin')->middleware('auth')->middleware('admin')->group(function 
 Route::get('/tesouraria', [GetController::class, 'tesouraria_dashboard'])->middleware('auth')->middleware('tesoureiro');
 
 Route::prefix('tesouraria')->middleware('auth')->middleware('tesoureiro')->group(function (){
+    Route::get('/caixa', [GetController::class, 'caixa_tesouraria'])->middleware('auth');
     Route::get('/perfil', [GetController::class, 'perfil_tesoura'])->middleware('auth');
-    Route::put('/perfil/actualizar', [UpdateController::class, 'updateTesoureiroPerfil'])->middleware('auth');
+    Route::put('/perfil/actualizar', [UpdateController::class, 'updateTesoureiroPerfil']);
+    Route::post('/caixa/movimento', [CreateController::class, 'storeMoviment']);
 
 });
 

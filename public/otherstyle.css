@@ -6,3 +6,21 @@
     position: fixed;
     z-index: 100;
 }
+
+#tabela-custom{
+    height: 250px;
+    overflow: auto;
+}
+
+.scroll-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    color: white;
+    border: none;
+    outline: none;
+  }
+  

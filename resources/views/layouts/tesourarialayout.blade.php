@@ -86,7 +86,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/logs">
+          <a class="nav-link" href="/tesouraria/caixa">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-support-16 text-warning text-sm opacity-10"></i>
             </div>
@@ -176,12 +176,12 @@
         @endif
       <div class="row">
         <div class="col-12">
-          <div class="card mb-4" style="margin-top: 100px">
-           
-            @yield('content')
+           <div class="container-fluid">
+             
+              @yield('content')
+           </div>
 
             
-          </div>
         </div>
       </div>
       
@@ -238,7 +238,13 @@
   <script src="/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 
   <script src="/otherscript.js"></script>
-
+  <script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+const popover = new bootstrap.Popover('.popover-dismiss', {
+  trigger: 'focus'
+})
+  </script>
 </body>
 
 </html>

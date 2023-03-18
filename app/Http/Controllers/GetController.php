@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
 use App\Models\User;
 use App\Models\DailyRead;
+use App\Models\Movimento;
+use App\Models\Caixa;
 use App\Models\CustomLog;
 
 class GetController extends Controller
@@ -97,6 +99,15 @@ class GetController extends Controller
         $user = auth()->user();
 
         return view('tesouraria.perfil', ['user' => $user]);
+    }
+
+    public function caixa_tesouraria(){
+        $user = auth()->user();
+        
+        $movimentos = Movimento::orderBy('id', 'desc')->get();
+        $saldo = Caixa::first();
+
+        return view('tesouraria.caixa', ['user' => $user, 'movimentos' => $movimentos, 'saldo' => $saldo]);
     }
 
 

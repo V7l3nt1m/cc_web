@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
 use App\Models\User;
+use App\Models\DailyRead;
+use App\Models\Movimento;
+use App\Models\Caixa;
 use App\Models\CustomLog;
 
 
@@ -54,11 +57,65 @@ class CreateController extends Controller
                 'nome_usuario' => auth()->user()->name,
                 'descricao' => $e->getMessage(),
                 'codigo' => $e->getCode(),
-                'controller' => "CadastroController",
+                'controller' => "CreateController",
                 'action' => "storeUsers",
             ]);
 
             return back()->with('erro', 'Ocorreu um erro '.$e->getCode()." Erro encaminhado para o admin");
         }
+    }
+
+    public function storeMoviment(Request $request){
+        $saldo = Caixa::first();
+
+        $request->validate([
+            'valor' => "required|max:$saldo->saldo_atual"
+        ]);
+
+        try {
+            if($request->accao == "add"){
+
+                Movimento::insert([
+                'descricao' => $request->descricao,
+                'valor_movimento' => $request->valor,
+                'tipo_movimento' => "entrada",
+                'saldo' => $saldo->saldo_atual,
+            ]);
+    
+            $saldo_atual = $saldo->saldo_atual + $request->valor;
+    
+                Caixa::find($saldo->id)->update([
+                    'saldo_atual' => $saldo_atual
+                ]);
+                
+            }elseif($request->accao = "subtract"){
+                Movimento::insert([
+                    'descricao' => $request->descricao,
+                    'valor_movimento' => $request->valor,
+                    'tipo_movimento' => "saida",
+                    'saldo' => $saldo->saldo_atual,
+                ]);
+        
+                $saldo_atual = $saldo->saldo_atual - $request->valor;
+        
+                    Caixa::find($saldo->id)->update([
+                        'saldo_atual' => $saldo_atual
+                    ]);
+            }
+
+            return back()->with('sucesso', "Operação Efectuada com Sucesso!");
+        } catch(\Throwable $e){
+            CustomLog::insert([
+                'nome_usuario' => auth()->user()->name,
+                'descricao' => $e->getMessage(),
+                'codigo' => $e->getCode(),
+                'controller' => "CreateController",
+                'action' => "storeMoviment",
+            ]);
+
+            return back()->with('erro', 'Ocorreu um erro '.$e->getCode()." Erro encaminhado para o admin");
+        }
+
+       
     }
 }
