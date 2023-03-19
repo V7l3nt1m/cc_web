@@ -14,20 +14,21 @@ return new class extends Migration
         Schema::create('cotas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('Jan');
-            $table->string('Fev');
-            $table->string('Mar');
-            $table->string('Abr');
-            $table->string('Maio');
-            $table->string('Jun');
-            $table->string('Jul');
-            $table->string('Ago');
-            $table->string('Set');
-            $table->string('Out');
-            $table->string('Nov');
-            $table->string('Dev');
-            $table->integer('ano')->default(date("Y"));
+            $table->decimal('Jan',9,2)->nullable();
+            $table->decimal('Fev',9,2)->nullable();
+            $table->decimal('Mar',9,2)->nullable();
+            $table->decimal('Abr',9,2)->nullable();
+            $table->decimal('Mai',9,2)->nullable();
+            $table->decimal('Jun',9,2)->nullable();
+            $table->decimal('Jul',9,2)->nullable();
+            $table->decimal('Ago',9,2)->nullable();
+            $table->decimal('Set',9,2)->nullable();
+            $table->decimal('Out',9,2)->nullable();
+            $table->decimal('Nov',9,2)->nullable();
+            $table->decimal('Dev',9,2)->nullable();
+            $table->integer('ano')->default(date("Y"))->nullable();
             $table->decimal('valor_total_a_dever', 9,2)->default(0);
+            $table->decimal('valor_total_pago', 9,2)->default(0);
             $table->timestamps();
         });
     }

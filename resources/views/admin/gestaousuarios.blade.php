@@ -54,7 +54,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="/photo/{{$users->photo}}" class="avatar avatar-sm me-3" style="height: 40px !important; width: 40px !important; border-radius: 50px;">
+                        <img src="/photo/{{$users->photo}}" class="avatar avatar-sm me-3" style="height: 90px !important; width: 90px !important; border-radius: 50px;">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <p class="mb-0 text-primary">{{$users->name}}</p>
@@ -216,14 +216,14 @@
                                   </div>
                                   <div class="col-md-3">
                                     <div class="form-group">
-                                      <input type="date" class="form-control form-control-lg" name="data_nasc" class="@error('data_nasc') is-invalid @enderror" required>
+                                      <input type="date" class="form-control form-control-lg" name="data_nasc" class="@error('data_nasc') is-invalid @enderror">
                                     </div>
                                   </div>
                                 </div>
 
                                         <div class="form-group">
                                           <input type="file" id="image" name="image" class="form-control form-control-lg" class="@error('imagem') is-invalid @enderror" accept="image/*"
-                                                              onchange="updatePreview(this, 'image-preview')" onchange="isImagem(this)"  placeholder="Foto meio corpo"  required="required" title="Faça o upload de uma fotografia meio corpo" data-toggle="tooltip"  data-placement="top">
+                                                              onchange="updatePreview(this, 'image-preview')" onchange="isImagem(this)"  placeholder="Foto meio corpo" title="Faça o upload de uma fotografia meio corpo" data-toggle="tooltip"  data-placement="top">
                                         </div>
 
                                         <div class="row d-flex justify-content-center align-items-center">

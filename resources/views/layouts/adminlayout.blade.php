@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="g-sidenav-show   bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
     <div id="preloader"></div>
 
   <div class="min-height-300 position-absolute w-100" style="background-color: #92746B"></div>
@@ -185,6 +185,8 @@
       }
     }
     </script>
+
+    
   
   <!--   Core JS Files   -->
   <script src="/assets/js/core/popper.min.js"></script>

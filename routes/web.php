@@ -46,6 +46,9 @@ Route::prefix('tesouraria')->middleware('auth')->middleware('tesoureiro')->group
     Route::get('/perfil', [GetController::class, 'perfil_tesoura'])->middleware('auth');
     Route::put('/perfil/actualizar', [UpdateController::class, 'updateTesoureiroPerfil']);
     Route::post('/caixa/movimento', [CreateController::class, 'storeMoviment']);
+    Route::post('/cotas/iniciar', [CreateController::class, 'iniciarCotas']);
+
+    
 
 });
 

@@ -10,6 +10,7 @@ use Illuminate\Http\Client\Response;
 use App\Models\User;
 use App\Models\DailyRead;
 use App\Models\Movimento;
+use App\Models\Cota;
 use App\Models\Caixa;
 use App\Models\CustomLog;
 
@@ -113,7 +114,19 @@ class GetController extends Controller
     public function cotas_tesouraria(){
         $user = auth()->user();
 
-        return view('tesouraria.cotas', ['user' => $user]);
+        $cotas = Cota::join('users', 'users.id', 'cotas.user_id')->orderBy('name', 'asc')->get();
+
+        $rankings  = Cota::join('users', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->get();
+
+        $search = request('search');
+        if($search){
+            $rankings_devedores_4  = Cota::join('users', 'users.id', 'cotas.user_id')->select(request('mes'))->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->limit(4)->get();
+        }else{
+            $rankings_devedores_4  = Cota::join('users', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->limit(4)->get();
+        }
+
+
+        return view('tesouraria.cotas', ['user' => $user, 'cotas' => $cotas, 'rankings' => $rankings, 'rankings_devedores_4' => $rankings_devedores_4]);
 
     }
 
