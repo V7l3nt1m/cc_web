@@ -67,8 +67,8 @@
         </div>
         --}}
 
-        <div class="container-fluid">
-            <h3 style="text-align: center" class="text-sucess">Quotização do Ano de {{ date("Y") }}</h3>
+        <div class="container-fluid" style="margin-top: 80px">
+            <h3 style="text-align: center" style="color:#92746c">Quotização do Ano de {{ date("Y") }}</h3>
 
             <div class="card ">
             
@@ -77,104 +77,154 @@
                       <tbody>
                         @foreach($cotas as $cota)
                         <tr>
-                          <td class="w-30">
+                          <td>
                             <div class="d-flex px-2 py-1 align-items-center">
                               <div>
                                 @if(isset($cota->photo) && file_exists(public_path("photo/$cota->photo")))
                                 <img src="/photo/{{ $cota->photo }}" alt="Country flag" style="width: 70px">
                                 @else
                                 <img src="/photos/download.png" alt="Country flag" style="width: 70px">
-                                @endif                              </div>
+                                @endif                              
+                              </div>
                               <div class="ms-4">
                                 <p class="text-xs font-weight-bold mb-0">Nome:</p>
                                 <h6 class="text-sm mb-0">{{ $cota->name }}</h6>
                               </div>
                             </div>
                           </td>
-                          <td>
-                            <div class="text-center">
+                            <td class="align-middle text-sm">
+                              <div class="text-center">
                               <p class="text-xs font-weight-bold mb-0">Valor a Dever:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->valor_total_a_dever }}</h6>
+                              <input type="number" class="form-control form-control-sm" disabled name="valor_total_a_dever" value="{{ $cota->valor_total_a_dever }}">
                             </div>
                           </td>
+                          
                           <td>
                             <div class="text-center">
                               <p class="text-xs font-weight-bold mb-0">Valor Total Pago:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->valor_total_a_dever }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="valor_total_pago" disabled  value="{{ $cota->valor_total_pago }}">
                             </div>
                           </td>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Jan:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Jan }}</h6>
+                              <input type="number" class="form-control form-control-sm"  name="Jan" value="{{ $cota->Jan }}">
                             </div>
                           </td>
+                        </form>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Fev:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Fev }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Fev" value="{{ $cota->Fev }}">
                             </div>
                           </td>
+                        </form>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Mar:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Mar }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Mar" value="{{ $cota->Mar }}">
                             </div>
                           </td>
+                        </form>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Abr:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Abr }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Abr" value="{{ $cota->Abr }}">
                             </div>
                           </td>
+                        </form>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Mai:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Mai }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Mai" value="{{ $cota->Mai }}">
                             </div>
                           </td>
+                        </form>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Jun:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Jun }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Jun" value="{{ $cota->Jun }}">
                             </div>
                           </td>
+                        </form> 
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')   
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Jul:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Jul }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Jul" value="{{ $cota->Jul }}">
                             </div>
                           </td>
+                        </form>
+                        <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                          @csrf
+                          @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Ago:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Ago }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Ago" value="{{ $cota->Ago }}">
                             </div>
                           </td>
+                          </form>
+                          <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                            @csrf
+                            @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Set:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Set }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Set" value="{{ $cota->Set }}">
                             </div>
                           </td>
+                          </form>
+                          <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                            @csrf
+                            @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Out:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Out }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Out" value="{{ $cota->Out }}">
                             </div>
                           </td>
+                          </form>
+                          <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                            @csrf
+                            @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Nov:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Nov }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Nov" value="{{ $cota->Nov }}">
                             </div>
                           </td>
+                          </form>
+                          <form action="/tesouraria/cotas/update/{{ $cota->id }}" method="POST">
+                            @csrf
+                            @method('PUT')
                           <td class="align-middle text-sm">
                             <div class="col text-center">
                               <p class="text-xs font-weight-bold mb-0">Dez:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Dez }}</h6>
+                              <input type="number" class="form-control form-control-sm" name="Dez" value="{{ $cota->Dez }}">
                             </div>
                           </td>
+                          </form>
                         </tr>
                         @endforeach
                        
@@ -186,136 +236,39 @@
         </div>
 
         
-        <div class="container-fluid">
-            <form method="GET">
-                  <h3 style="text-align: center" class="text-sucess">Devedores do Mês de 
-                        <select name="mes" id="" required>
-                        <option value="" disabled selected>Mês</option>
-                        <option value="Jan">Jan</option>
-                        <option value="Fev">Fev</option>
-                        <option value="Mar">Mar</option>
-                        <option value="Abr">Abr</option>
-                        <option value="Mai">Mai</option>
-                        <option value="Jun">Jun</option>
-                        <option value="Jul">Jul</option>
-                        <option value="Ago">Ago</option>
-                        <option value="Set">Set</option>
-                        <option value="Out">Out</option>
-                        <option value="Nov">Nov</option>
-                        <option value="Dez">Dez</option>
+        <div class="container-fluid" style="margin-top: 40px">
+                  <h3 style="text-align: center" class="text-sucess">Devedores de {{ date("m/Y") }}</h3>
 
-                        </select>
-                        <button class="btn btn-success" type="submit" style="">Pesquisar</button>
-            </div>
-                  
-                  </h3>
-            </form>
-
-            <div class="card ">
+            <div class="card">
                   <div class="table-responsive">
-                    <table class="table align-items-center ">
+                    <table class="table align-items-center">
                       <tbody>
-                        @foreach($cotas as $cota)
+                        @foreach($devedores as $cota)
                         <tr>
-                          <td class="w-30">
-                            <div class="d-flex px-2 py-1 align-items-center">
+                          <td class="align-middle text-sm">
+                            <h3 class="font-weight-bold mb-0">{{ $loop->index+1 }}#</h3>
+                        </td>
+                          <td>
+                            <div class="d-flex px-1 py-2 align-items-center">
+                              
                               <div>
                                 @if(isset($cota->photo) && file_exists(public_path("photo/$cota->photo")))
                                 <img src="/photo/{{ $cota->photo }}" alt="Country flag" style="width: 70px">
                                 @else
                                 <img src="/photos/download.png" alt="Country flag" style="width: 70px">
-                                @endif
-                              </div>
+                                @endif                              
+                               </div>
                               <div class="ms-4">
                                 <p class="text-xs font-weight-bold mb-0">Nome:</p>
                                 <h6 class="text-sm mb-0">{{ $cota->name }}</h6>
                               </div>
                             </div>
                           </td>
-                          <td>
-                            <div class="text-center">
-                              <p class="text-xs font-weight-bold mb-0">Valor a Dever:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->valor_total_a_dever }}</h6>
-                            </div>
+                            <td class="align-middle text-sm">
+                              <h3 class="font-weight-bold mb-0">{{ number_format($cota->valor_total_a_dever, 2, ',', '.') }} Kz</h3>
                           </td>
-                          <td>
-                            <div class="text-center">
-                              <p class="text-xs font-weight-bold mb-0">Valor Total Pago:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->valor_total_a_dever }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Jan:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Jan }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Fev:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Fev }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Mar:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Mar }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Abr:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Abr }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Mai:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Mai }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Jun:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Jun }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Jul:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Jul }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Ago:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Ago }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Set:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Set }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Out:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Out }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Nov:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Nov }}</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle text-sm">
-                            <div class="col text-center">
-                              <p class="text-xs font-weight-bold mb-0">Dez:</p>
-                              <h6 class="text-sm mb-0">{{ $cota->Dez }}</h6>
-                            </div>
-                          </td>
+                         
+                       
                         </tr>
                         @endforeach
                        

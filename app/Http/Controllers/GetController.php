@@ -18,6 +18,8 @@ class GetController extends Controller
 {
     public function index(){
 
+        return redirect('/cotas');
+
     $datetoday = date('d/m/Y');
 
     $liturgia = DailyRead::orderBy('id', 'desc')->limit(1)
@@ -45,6 +47,15 @@ class GetController extends Controller
   return view('welcome', ['liturgia'=>$liturgia, 'admins' => $admins]);
     }
 
+    public function cotasTodos(){
+
+        $user = auth()->user();
+
+        $devedores  = User::join('cotas', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->where('valor_total_a_dever', ">", 0)->get();
+
+        return view('cotas', ['user' => $user, 'devedores' => $devedores]);
+    }
+
     public function admin_dashboard(){
         $user = auth()->user();
 
@@ -64,7 +75,7 @@ class GetController extends Controller
         if($search){
             $usuarios = User::where('name', 'like', '%'.$search.'%')->orWhere('genero',  'like', '%'.$search.'%')->get();
         }else{
-            $usuarios = User::where('id',"<>", $user->id)->get();
+            $usuarios = User::where('id',"<>", $user->id)->orderBy('name', 'asc')->get();
         }
 
         return view('admin.gestaousuarios', ['user' => $user, 'usuarios' => $usuarios]);
@@ -112,21 +123,20 @@ class GetController extends Controller
     }
 
     public function cotas_tesouraria(){
+ /*      $deves = Cota::where('valor_total_a_dever', "<>", NULL)->get();
+        foreach ($deves as $deve) {
+            $deve->valor_total_a_dever+=300;
+            $deve->save();
+        }*/ //cpdogp perigoso
+
         $user = auth()->user();
 
-        $cotas = Cota::join('users', 'users.id', 'cotas.user_id')->orderBy('name', 'asc')->get();
-
-        $rankings  = Cota::join('users', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->get();
-
-        $search = request('search');
-        if($search){
-            $rankings_devedores_4  = Cota::join('users', 'users.id', 'cotas.user_id')->select(request('mes'))->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->limit(4)->get();
-        }else{
-            $rankings_devedores_4  = Cota::join('users', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->limit(4)->get();
-        }
+        $cotas = User::join('cotas', 'users.id', 'cotas.user_id')->orderBy('name', 'asc')->get();
 
 
-        return view('tesouraria.cotas', ['user' => $user, 'cotas' => $cotas, 'rankings' => $rankings, 'rankings_devedores_4' => $rankings_devedores_4]);
+        $devedores  = User::join('cotas', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->where('valor_total_a_dever', ">", 0)->get();
+
+        return view('tesouraria.cotas', ['user' => $user, 'cotas' => $cotas, 'devedores' => $devedores]);
 
     }
 

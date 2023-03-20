@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
 use App\Models\User;
+use App\Models\DailyRead;
+use App\Models\Cota;
+use App\Models\Movimento;
+use App\Models\Caixa;
+use App\Models\CustomLog;
 
 class UpdateController extends Controller
 {
@@ -184,6 +189,24 @@ class UpdateController extends Controller
         }
         
 
+        public function updateCotaValores(Request $request){
+
+            Cota::find($request->id)->update($request->all());
+            
+            $cota = Cota::find($request->id);
+
+            $meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+            foreach ($meses as $mes) {
+                if(isset($request->$mes)){
+                    $cota->valor_total_a_dever-= $request->$mes;
+                    $cota->valor_total_pago+= $request->$mes;
+                    $cota->save();
+                }
+            }
+            
+               return back();
+        }
     
 }
 

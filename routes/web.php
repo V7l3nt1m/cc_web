@@ -19,6 +19,9 @@ use App\Models\User;
 
 Route::get('/', [GetController::class, 'index']);
 
+Route::get('/cotas', [GetController::class, 'cotasTodos']);
+
+
 Route::get('/admin', [GetController::class, 'admin_dashboard'])->middleware('auth')->middleware('admin');
 Route::put('/lock/{id}', [UpdateController::class, 'lock_user'])->middleware('auth')->name('lock');
 Route::put('/unlock/{id}', [UpdateController::class, 'unlock_user'])->middleware('auth');
@@ -48,6 +51,9 @@ Route::prefix('tesouraria')->middleware('auth')->middleware('tesoureiro')->group
     Route::post('/caixa/movimento', [CreateController::class, 'storeMoviment']);
     Route::post('/cotas/iniciar', [CreateController::class, 'iniciarCotas']);
 
+    Route::put('/cotas/update/{id}', [UpdateController::class, 'updateCotaValores']);
+
+    
     
 
 });
