@@ -191,6 +191,8 @@ class UpdateController extends Controller
 
         public function updateCotaValores(Request $request){
 
+            $caixa = Caixa::orderBy('id', 'desc');
+
             Cota::find($request->id)->update($request->all());
             
             $cota = Cota::find($request->id);
@@ -202,6 +204,9 @@ class UpdateController extends Controller
                     $cota->valor_total_a_dever-= $request->$mes;
                     $cota->valor_total_pago+= $request->$mes;
                     $cota->save();
+                    $caixa->update([
+                        
+                    ]);
                 }
             }
             

@@ -18,8 +18,6 @@ class GetController extends Controller
 {
     public function index(){
 
-        return redirect('/cotas');
-
     $datetoday = date('d/m/Y');
 
     $liturgia = DailyRead::orderBy('id', 'desc')->limit(1)
@@ -51,7 +49,7 @@ class GetController extends Controller
 
         $user = auth()->user();
 
-        $devedores  = User::join('cotas', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->where('valor_total_a_dever', ">", 0)->get();
+        $devedores  = User::join('cotas', 'users.id', 'cotas.user_id')->where('ano', date("Y"))->orderBy('valor_total_a_dever', 'desc')->where('valor_total_a_dever', ">=", 0)->get();
 
         return view('cotas', ['user' => $user, 'devedores' => $devedores]);
     }
